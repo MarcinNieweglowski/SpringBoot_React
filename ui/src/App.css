@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+body {
+  background: url("../assets/images/background_img.JPG") no-repeat center fixed;
+  background-size: cover;
+  height: 100%;
+}
+
+.marginate {
+  margin: 1rem;
+  padding: 0.5rem;
+}

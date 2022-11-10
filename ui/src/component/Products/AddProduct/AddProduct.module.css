@@ -1,0 +1,16 @@
+.invalid {
+    background-color: lightcoral;
+    border: red 1px solid;
+    border-radius: 3px;
+}
+
+.valid {
+    background-color: lawngreen;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.centerize {
+    margin: auto;
+    width: 50%;
+}

@@ -1,0 +1,11 @@
+.text {
+    color: crimson;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bold;
+ }
+
+.total {
+    padding: 0.3rem;
+    border: 1px crimson solid;
+    border-radius: 1rem;
+}
