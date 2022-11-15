@@ -61,17 +61,4 @@ public class UserServiceImpl implements UserService {
         this.userRepository.delete(userToDelete);
         log.info("Deleted user: '{}'", userToDelete.getUsername());
     }
-
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        log.info("About to load user by username: '{}'", username);
-//        Optional<User> user = this.userRepository.findByUsername(username);
-//
-//        if (user.isEmpty()) {
-//            throw new UsernameNotFoundException(username);
-//        }
-//
-//        log.info("Found the user: '{}'", username);
-//        return new UserDetailsData(user.get());
-//    }
 }

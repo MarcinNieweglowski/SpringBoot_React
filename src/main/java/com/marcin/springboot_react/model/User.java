@@ -30,7 +30,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference
-//    @JsonIgnore
     private List<Product> productList;
 
     @Override
