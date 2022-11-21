@@ -1,6 +1,7 @@
 package com.marcin.springboot_react.controller.rest;
 
 import com.marcin.springboot_react.exception.InsufficientUserLevelException;
+import com.marcin.springboot_react.exception.UserNotFoundException;
 import com.marcin.springboot_react.model.User;
 import com.marcin.springboot_react.model.UserLevel;
 import com.marcin.springboot_react.service.UserService;
@@ -24,13 +25,13 @@ public class UserController {
     }
 
     @PutMapping
-    public User updateUser(@RequestAttribute("user") User user, @RequestBody User modifiedUser) throws InsufficientUserLevelException {
+    public User updateUser(@RequestAttribute("user") User user, @RequestBody User modifiedUser) throws InsufficientUserLevelException, UserNotFoundException {
         validateUser(user);
         return this.userService.updateUser(modifiedUser);
     }
 
     @DeleteMapping
-    public void deleteUser(@RequestAttribute("user") User user, User userToDelete) throws InsufficientUserLevelException {
+    public void deleteUser(@RequestAttribute("user") User user, @RequestBody User userToDelete) throws InsufficientUserLevelException {
         validateUser(user);
         this.userService.deleteUser(userToDelete);
     }

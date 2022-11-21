@@ -1,5 +1,6 @@
 package com.marcin.springboot_react.configuration;
 
+import com.marcin.springboot_react.exception.UserNotFoundException;
 import com.marcin.springboot_react.model.User;
 import com.marcin.springboot_react.service.UserService;
 import com.marcin.springboot_react.utils.JwtUtils;
@@ -48,8 +49,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String tokenFromRequest = request.getHeader(this.jwtHeader);
 
-        if (tokenFromRequest != null && tokenFromRequest.startsWith(BEARER)) {
-            validateBearerToken(request, tokenFromRequest);
+        if (tokenFromRequest != null && tokenFromRequest.startsWith(BEARER) && tokenFromRequest.length() > BEARER.length()) {
+            try {
+                validateBearerToken(request, tokenFromRequest);
+            } catch (UserNotFoundException e) {
+                log.error("User not found");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
+                return;
+            }
         } else {
             log.error("Invalid or no security token found");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or no security token found");
@@ -59,7 +66,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private void validateBearerToken(HttpServletRequest request, String tokenFromRequest) {
+    private void validateBearerToken(HttpServletRequest request, String tokenFromRequest) throws UserNotFoundException {
         String token = tokenFromRequest.substring(BEARER.length());
         log.info("Retrieved the token from the request header");
         String username = this.jwtUtils.getUsernameFromToken(token);

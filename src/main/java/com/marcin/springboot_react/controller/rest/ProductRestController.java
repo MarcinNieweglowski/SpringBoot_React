@@ -35,7 +35,7 @@ public class ProductRestController {
     @GetMapping
     public List<Product> getAllProductsForUser(@RequestAttribute("user") User user) {
         log.info("Getting all products for user: '{}'", user.getUsername());
-        List<Product> products = this.productService.getAllProducts(user);
+        List<Product> products = this.productService.getAllProductsForUser(user);
         log.info("Returning list of all({}) products: {}", products.size(), products);
         return products;
     }
@@ -69,7 +69,7 @@ public class ProductRestController {
 
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadForUser(@RequestAttribute("user") User user) throws IOException {
-        List<Product> products = this.productService.getAllProducts(user);
+        List<Product> products = this.productService.getAllProductsForUser(user);
         File file = this.printerService.download(products);
         InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 

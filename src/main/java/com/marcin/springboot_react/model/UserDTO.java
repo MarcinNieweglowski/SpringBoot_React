@@ -12,6 +12,6 @@ public class UserDTO {
     private Long userId;
     private String username;
     private String password;
-    private UserLevel userLevel;
+    private UserLevel userLevel = UserLevel.USER;
     private String token;
 }
